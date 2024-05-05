@@ -1,1 +1,6 @@
-@extends('layouts.app', ['title' => 'Página Inicial'])
+@extends('layouts.app', [
+    'title' => 'Página inicial',
+    'btnText' => '',
+    'btnRoute' => '',
+    'breadCrumb' => []
+])

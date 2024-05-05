@@ -19,7 +19,14 @@ class RolesTableSeeder extends Seeder
         ];
 
         foreach ($roles as $role) {
-            \Spatie\Permission\Models\Role::create(['name' => $role]);
+            if (!\Spatie\Permission\Models\Role::where('name', $role)->exists()) {
+                \Spatie\Permission\Models\Role::create(['name' => $role]);
+            }
+
+            $permissions = \Spatie\Permission\Models\Permission::all();
+            foreach ($permissions as $permission) {
+                \Spatie\Permission\Models\Role::findByName('admin')->givePermissionTo($permission);
+            }
         }
     }
 }

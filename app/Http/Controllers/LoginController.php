@@ -22,6 +22,6 @@ class LoginController extends Controller
             }
         }
 
-//        return redirect()->route('login')->with('error', 'Usuário ou senha inválidos');
+        return redirect()->route('login')->with('error', 'Usuário ou senha inválidos');
     }
 }

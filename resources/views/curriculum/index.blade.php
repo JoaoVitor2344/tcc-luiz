@@ -1,7 +1,13 @@
-@extends('layouts.app', ['title' => 'Currículo', 'btnText' => 'Cadastrar currículo', 'btnRoute' => 'curriculum.create', 'breadCrumb' => 'Currículo'])
+@extends('layouts.app', [
+    'title' => 'Currículo',
+    'btnText' => 'Cadastrar currículo',
+    'btnRoute' => 'curriculum.create',
+    'breadCrumb' => [
+        ['text' => 'Currículos'],
+    ]
+])
 
 @section('content')
-
     <div class="row">
         @foreach($curriculums as $curriculum)
             <div class="col-sm-4 mb-4">
@@ -20,5 +26,4 @@
             </div>
         @endforeach
     </div>
-
 @endsection

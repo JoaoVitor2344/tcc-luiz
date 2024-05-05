@@ -52,7 +52,7 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link collapsed" href="{{ route('curriculum.index') }}">
                 <i data-feather="book-open"></i>
                 <span>Currículos</span>
             </a>
@@ -307,13 +307,25 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ $breadCrumb }}</li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Página Inicial</a></li>
+                            @if(count($breadCrumb) > 0)
+                                @foreach($breadCrumb as $item)
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        @if(isset($item['route']))
+                                            <a href="{{ route($item['route']) }}">{{ $item['text'] }}</a>
+                                        @else
+                                            {{ $item['text'] }}
+                                        @endif
+                                    </li>
+                                @endforeach
+                            @endif
                         </ol>
                     </nav>
 
-                    <a href="{{ route($btnRoute) }}"
-                       class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">{{ $btnText }}</a>
+                    @if($btnText != '')
+                        <a href="{{ route($btnRoute) }}"
+                           class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">{{ $btnText }}</a>
+                    @endif
                 </div>
 
                 @yield('content')
@@ -383,6 +395,8 @@
         feather.replace();
     });
 </script>
+
+@stack('js')
 
 </body>
 

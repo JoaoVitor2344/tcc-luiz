@@ -1,4 +1,12 @@
-@extends('layouts.app', ['title' => 'Curriculum'])
+@extends('layouts.app', [
+    'title' => 'Currículo',
+    'btnText' => 'Cadastrar currículo',
+    'btnRoute' => 'curriculum.create',
+    'breadCrumb' => [
+        ['text' => 'Currículos', 'route' => 'curriculum.index'],
+        ['text' => 'Detalhes']
+    ]
+])
 
 @section('content')
     <div class="row">
@@ -48,7 +56,8 @@
                                         <li class="mb-3">
                                             <h4>{{ $experience['company'] }}</h4>
                                             <p class="mb-0">{{ $experience['position'] }}</p>
-                                            <p class="mb-0">{{ $experience['start_date'] }} - {{ $experience['end_date'] }}</p>
+                                            <p class="mb-0">{{ $experience['start_date'] }}
+                                                - {{ $experience['end_date'] }}</p>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -72,7 +81,8 @@
                                             <h4>{{ $education['course'] }}</h4>
                                             <p class="mb-0">{{ $education['institution'] }}</p>
                                             <p class="mb-0">{{ $education['status'] }}</p>
-                                            <p class="mb-0">{{ $education['start_date'] }} - {{ $education['end_date'] }}</p>
+                                            <p class="mb-0">{{ $education['start_date'] }}
+                                                - {{ $education['end_date'] }}</p>
                                         </li>
                                     @endforeach
                                 </ul>
