@@ -13,6 +13,7 @@ class Curriculum extends Model
     protected $table = 'curriculums';
 
     protected $fillable = [
+        'user_id',
         'name',
         'email',
         'phone',

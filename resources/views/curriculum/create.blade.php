@@ -9,7 +9,7 @@
 ])
 
 @section('content')
-    <form class="d-flex" action="{{ route('curriculum.create') }}" method="POST">
+    <form class="d-flex" action="{{ route('curriculum.store') }}" method="POST">
         @csrf
         <div class="col-sm-4">
             <div class="form-group">
@@ -21,6 +21,49 @@
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Endereço">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" list="dataListStates" name="state" id="state"
+                       onchange="updateStates()" placeholder="Estado">
+                <datalist id="dataListStates">
+                    <option value="AC">
+                    <option value="AL">
+                    <option value="AP">
+                    <option value="AM">
+                    <option value="BA">
+                    <option value="CE">
+                    <option value="DF">
+                    <option value="ES">
+                    <option value="GO">
+                    <option value="MA">
+                    <option value="MT">
+                    <option value="MS">
+                    <option value="MG">
+                    <option value="PA">
+                    <option value="PB">
+                    <option value="PR">
+                    <option value="PE">
+                    <option value="PI">
+                    <option value="RJ">
+                    <option value="RN">
+                    <option value="RS">
+                    <option value="RO">
+                    <option value="RR">
+                    <option value="SC">
+                    <option value="SP">
+                    <option value="SE">
+                    <option value="TO">
+                </datalist>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" list="dataListCitys" name="city" id="city" placeholder="Cidade">
+                <datalist id="dataListCitys"></datalist>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="CEP">
             </div>
             <button class="btn btn-outline-primary w-100">Cadastrar</button>
         </div>
@@ -123,17 +166,17 @@
 
                     $('#experiences').find('.card-body').append(
                         "<div class='form-group mb-5'>" +
-                            "<div class='row'>" +
-                                "<div class='col-sm-6'><input type='text' class='form-control' id='company' name='company[]' placeholder='Empresa'> </div>" +
-                                "<div class='col-sm-6'><input type='text' class='form-control' id='position' name='position[]' placeholder='Posição'> </div>" +
-                            "</div>" +
-                            "<div class='row mt-2'>" +
-                                "<div class='col-sm-6'><input type='date' class='form-control' id='start_date' name='start_date[]' placeholder='Data inicial'> </div>" +
-                                "<div class='col-sm-6'><input type='date' class='form-control' id='end_date' name='end_date[]' placeholder='Data final'> </div>" +
-                            "</div>" +
-                            "<div class='row mt-2'>" +
-                                "<div class='col-sm-12'><button class='btn btn-outline-danger w-100 btnRemoveExperience'><i data-feather='trash'></i></button></div>" +
-                            "</div>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-6'><input type='text' class='form-control' id='company' name='company[]' placeholder='Empresa'> </div>" +
+                        "<div class='col-sm-6'><input type='text' class='form-control' id='position' name='position[]' placeholder='Posição'> </div>" +
+                        "</div>" +
+                        "<div class='row mt-2'>" +
+                        "<div class='col-sm-6'><input type='date' class='form-control' id='start_date' name='start_date[]' placeholder='Data inicial'> </div>" +
+                        "<div class='col-sm-6'><input type='date' class='form-control' id='end_date' name='end_date[]' placeholder='Data final'> </div>" +
+                        "</div>" +
+                        "<div class='row mt-2'>" +
+                        "<div class='col-sm-12'><button class='btn btn-outline-danger w-100 btnRemoveExperience'><i data-feather='trash'></i></button></div>" +
+                        "</div>" +
                         "</div>"
                     );
 
@@ -150,26 +193,26 @@
 
                     $('#educations').find('.card-body').append(
                         "<div class='form-group mb-5'>" +
-                            "<div class='row'>" +
-                                "<div class='col-sm-12'><input type='text' class='form-control' id='course' name='course[]' placeholder='Curso'> </div>" +
-                            "</div>" +
-                            "<div class='row mt-2'>" +
-                                "<div class='col-sm-6'><input type='text' class='form-control' id='institution' name='institution[]' placeholder='Instituição'> </div>" +
-                                "<div class='col-sm-6'>" +
-                                    "<select class='form-control' id='status' name='status[]'> " +
-                                        "<option value='1'>Cursando</option>" +
-                                        "<option value='2'>Concluído</option>" +
-                                    "</select>" +
-                                "</div>" +
-                            "</div>" +
-                            "<div class='row mt-2'>" +
-                                "<div class='col-sm-6'><input type='date' class='form-control' id='start_date' name='start_date[]' placeholder='Data inicial'> </div>" +
-                                "<div class='col-sm-6'><input type='date' class='form-control' id='end_date' name='end_date[]' placeholder='Data final'> </div> " +
-                            "</div>" +
-                            "<div class='row mt-2'>" +
-                                "<div class='col-sm-12'><button class='btn btn-outline-danger w-100 btnRemoveEducations'><i data-feather='trash'></i></button></div>" +
-                                "</div>" +
-                            "</div>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-12'><input type='text' class='form-control' id='course' name='course[]' placeholder='Curso'> </div>" +
+                        "</div>" +
+                        "<div class='row mt-2'>" +
+                        "<div class='col-sm-6'><input type='text' class='form-control' id='institution' name='institution[]' placeholder='Instituição'> </div>" +
+                        "<div class='col-sm-6'>" +
+                        "<select class='form-control' id='status' name='status[]'> " +
+                        "<option value='1'>Cursando</option>" +
+                        "<option value='2'>Concluído</option>" +
+                        "</select>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='row mt-2'>" +
+                        "<div class='col-sm-6'><input type='date' class='form-control' id='start_date' name='start_date[]' placeholder='Data inicial'> </div>" +
+                        "<div class='col-sm-6'><input type='date' class='form-control' id='end_date' name='end_date[]' placeholder='Data final'> </div> " +
+                        "</div>" +
+                        "<div class='row mt-2'>" +
+                        "<div class='col-sm-12'><button class='btn btn-outline-danger w-100 btnRemoveEducations'><i data-feather='trash'></i></button></div>" +
+                        "</div>" +
+                        "</div>" +
                         "</div>"
                     );
 
@@ -186,16 +229,16 @@
 
                     $('#certifications').find('.card-body').append(
                         "<div class='form-group mb-5'>" +
-                            "<div class='row'>" +
-                                "<div class='col-sm-12'><input type='text' class='form-control' id='certification' name='certification[]' placeholder='Certificação'> </div>" +
-                            "</div>" +
-                            "<div class='row mt-2'>" +
-                                "<div class='col-sm-6'><input type='text' class='form-control' id='institution' name='institution[]' placeholder='Instituição'> </div>" +
-                                "<div class='col-sm-6'><input type='date' class='form-control' id='date' name='date[]' placeholder='Data'> </div>" +
-                            "</div>" +
-                            "<div class='row mt-2'>" +
-                                "<div class='col-sm-12'><button class='btn btn-outline-danger w-100 btnRemoveCertifications'><i data-feather='trash'></i></button></div>" +
-                            "</div>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-12'><input type='text' class='form-control' id='certification' name='certification[]' placeholder='Certificação'> </div>" +
+                        "</div>" +
+                        "<div class='row mt-2'>" +
+                        "<div class='col-sm-6'><input type='text' class='form-control' id='institution' name='institution[]' placeholder='Instituição'> </div>" +
+                        "<div class='col-sm-6'><input type='date' class='form-control' id='date' name='date[]' placeholder='Data'> </div>" +
+                        "</div>" +
+                        "<div class='row mt-2'>" +
+                        "<div class='col-sm-12'><button class='btn btn-outline-danger w-100 btnRemoveCertifications'><i data-feather='trash'></i></button></div>" +
+                        "</div>" +
                         "</div>"
                     );
 
@@ -212,13 +255,13 @@
 
                     $('#languages').find('.card-body').append(
                         "<div class='form-group mb-5'>" +
-                            "<div class='row'>" +
-                                "<div class='col-sm-6'><input type='text' class='form-control' id='language' name='language[]' placeholder='Idioma'> </div>" +
-                                "<div class='col-sm-6'><input type='text' class='form-control' id='level' name='level[]' placeholder='Nível'> </div>" +
-                            "</div>" +
-                            "<div class='row mt-2'>" +
-                                "<div class='col-sm-12'><button class='btn btn-outline-danger w-100 btnRemoveLanguages'><i data-feather='trash'></i></button></div>" +
-                            "</div>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-6'><input type='text' class='form-control' id='language' name='language[]' placeholder='Idioma'> </div>" +
+                        "<div class='col-sm-6'><input type='text' class='form-control' id='level' name='level[]' placeholder='Nível'> </div>" +
+                        "</div>" +
+                        "<div class='row mt-2'>" +
+                        "<div class='col-sm-12'><button class='btn btn-outline-danger w-100 btnRemoveLanguages'><i data-feather='trash'></i></button></div>" +
+                        "</div>" +
                         "</div>"
                     );
 
@@ -235,12 +278,12 @@
 
                     $('#hobbys').find('.card-body').append(
                         "<div class='form-group mb-5'>" +
-                            "<div class='row'>" +
-                                "<div class='col-sm-12'><input type='text' class='form-control' id='hobby' name='hobby[]' placeholder='Lazer'> </div>" +
-                            "</div>" +
-                            "<div class='row mt-2'>" +
-                                "<div class='col-sm-12'><button class='btn btn-outline-danger w-100 btnRemoveHobbys'><i data-feather='trash'></i></button></div>" +
-                            "</div>" +
+                        "<div class='row'>" +
+                        "<div class='col-sm-12'><input type='text' class='form-control' id='hobby' name='hobby[]' placeholder='Lazer'> </div>" +
+                        "</div>" +
+                        "<div class='row mt-2'>" +
+                        "<div class='col-sm-12'><button class='btn btn-outline-danger w-100 btnRemoveHobbys'><i data-feather='trash'></i></button></div>" +
+                        "</div>" +
                         "</div>"
                     );
 
@@ -251,7 +294,36 @@
                         $(this).closest('.form-group').remove();
                     });
                 });
-            })
+
+                $('#phone').mask('(00) 0 0000-0000');
+
+                $('#zip_code').mask('00000-000');
+            });
+
+            function updateStates() {
+                const stateSelect = $("#state").val();
+                const dataListCitys = $("#dataListCitys");
+                const loader = $("#loader");
+
+                loader.show();
+
+                $.ajax({
+                    url: `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateSelect}/municipios`,
+                    method: 'GET',
+                    success: function (response) {
+                        dataListCitys.empty();
+                        response.forEach(function (city) {
+                            dataListCitys.append(`<option value="${city.nome}">${city.nome}</option>`);
+                        });
+                    },
+                    error: function (error) {
+                        console.error('Erro ao obter cidades:', error);
+                    },
+                    complete: function () {
+                        loader.hide();
+                    }
+                });
+            }
         </script>
     @endpush
 @endsection

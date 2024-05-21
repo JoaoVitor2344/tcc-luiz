@@ -35,4 +35,119 @@ class CurriculumController extends Controller
 
         return view('curriculum.create', compact('users'));
     }
+
+    public function store(Request $request)
+    {
+        if (!auth()->user()->can('curriculum.create')) {
+            abort(403);
+        }
+
+        $data = $request->validate([
+            'user' => 'required|exists:users,id',
+            'phone' => 'required|string',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'state' => 'required|string',
+            'zip_code' => 'required|string',
+            'skill' => 'array',
+            'skill.*' => 'string|nullable',
+            'level' => 'array',
+            'level.*' => 'string|nullable',
+            'company' => 'array',
+            'company.*' => 'string|nullable',
+            'position' => 'array',
+            'position.*' => 'string|nullable',
+            'start_date' => 'array',
+            'start_date.*' => 'date|nullable',
+            'end_date' => 'array',
+            'end_date.*' => 'date|nullable',
+            'course' => 'array',
+            'course.*' => 'string|nullable',
+            'institution' => 'array',
+            'institution.*' => 'string|nullable',
+            'status' => 'array',
+            'status.*' => 'integer|nullable',
+            'certification' => 'array',
+            'certification.*' => 'string|nullable',
+            'date' => 'array',
+            'date.*' => 'date|nullable',
+            'language' => 'array',
+            'language.*' => 'string|nullable',
+            'hobby' => 'array',
+            'hobby.*' => 'string|nullable',
+        ]);
+
+        $curriculum = Curriculum::create([
+            'user_id' => $data['user'],
+            'phone' => $data['phone'],
+        ]);
+
+        foreach ($data['skill'] as $index => $skill) {
+            if ($skill) {
+                Skill::create([
+                    'curriculum_id' => $curriculum->id,
+                    'skill' => $skill,
+                    'level' => $data['level'][$index] ?? null,
+                ]);
+            }
+        }
+
+        foreach ($data['company'] as $index => $company) {
+            if ($company) {
+                Experience::create([
+                    'curriculum_id' => $curriculum->id,
+                    'company' => $company,
+                    'position' => $data['position'][$index] ?? null,
+                    'start_date' => $data['start_date'][$index] ?? null,
+                    'end_date' => $data['end_date'][$index] ?? null,
+                ]);
+            }
+        }
+
+        foreach ($data['course'] as $index => $course) {
+            if ($course) {
+                Education::create([
+                    'curriculum_id' => $curriculum->id,
+                    'course' => $course,
+                    'institution' => $data['institution'][$index] ?? null,
+                    'status' => $data['status'][$index] ?? null,
+                    'start_date' => $data['start_date'][$index] ?? null,
+                    'end_date' => $data['end_date'][$index] ?? null,
+                ]);
+            }
+        }
+
+        foreach ($data['certification'] as $index => $certification) {
+            if ($certification) {
+                Certification::create([
+                    'curriculum_id' => $curriculum->id,
+                    'certification' => $certification,
+                    'institution' => $data['institution'][$index] ?? null,
+                    'date' => $data['date'][$index] ?? null,
+                ]);
+            }
+        }
+
+        foreach ($data['language'] as $index => $language) {
+            if ($language) {
+                Language::create([
+                    'curriculum_id' => $curriculum->id,
+                    'language' => $language,
+                    'level' => $data['level'][$index] ?? null,
+                ]);
+            }
+        }
+
+        foreach ($data['hobby'] as $index => $hobby) {
+            if ($hobby) {
+                Hobby::create([
+                    'curriculum_id' => $curriculum->id,
+                    'hobby' => $hobby,
+                ]);
+            }
+        }
+
+        return redirect()->route('curriculum.index')->with('success', 'Currículo criado com sucesso!');
+    }
+
 }

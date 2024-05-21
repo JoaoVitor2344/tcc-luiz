@@ -21,6 +21,8 @@
 
 <body id="page-top">
 
+<div id="loader" style="display: none;">Carregando...</div>
+
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -390,6 +392,12 @@
 
 <!-- Jquery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Jquery Mask -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
 <script>
     $(document).ready(function () {
         feather.replace();
