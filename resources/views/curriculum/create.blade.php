@@ -23,6 +23,9 @@
                 <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone">
             </div>
             <div class="form-group">
+                <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="CEP">
+            </div>
+            <div class="form-group">
                 <input type="text" class="form-control" id="address" name="address" placeholder="Endereço">
             </div>
             <div class="form-group">
@@ -61,9 +64,6 @@
             <div class="form-group">
                 <input type="text" class="form-control" list="dataListCitys" name="city" id="city" placeholder="Cidade">
                 <datalist id="dataListCitys"></datalist>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="CEP">
             </div>
             <button class="btn btn-outline-primary w-100">Cadastrar</button>
         </div>
@@ -141,6 +141,8 @@
 
     @push('js')
         <script>
+            const loader = $("#loader");
+
             $(document).ready(function () {
                 $('#btnAddSkill').click(function (e) {
                     e.preventDefault();
@@ -298,12 +300,35 @@
                 $('#phone').mask('(00) 0 0000-0000');
 
                 $('#zip_code').mask('00000-000');
+
+                $('#zip_code').on('blur', buscaCEP);
             });
+
+            function buscaCEP() {
+                var cep = $("#zip_code").val();
+
+                loader.show();
+
+                $.ajax({
+                    url: `https://viacep.com.br/ws/${cep}/json/`,
+                    method: 'GET',
+                    success: function (response) {
+                        $("#address").val(response.logradouro);
+                        $('#state').val(response.uf);
+                        $('#city').val(response.localidade);
+                    },
+                    error: function (error) {
+                        console.error('Erro ao consultar CEP:', error);
+                    },
+                    complete: function () {
+                        loader.hide();
+                    }
+                });
+            }
 
             function updateStates() {
                 const stateSelect = $("#state").val();
                 const dataListCitys = $("#dataListCitys");
-                const loader = $("#loader");
 
                 loader.show();
 
