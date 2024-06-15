@@ -5,3 +5,9 @@
     width: 20px;
     height: 20px;
 }
+
+.show-password {
+    cursor: pointer;
+    position: absolute;
+    right: 25px;
+}

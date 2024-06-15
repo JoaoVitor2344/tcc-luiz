@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <p class="mb-0">{{ $curriculum->phone }}</p>
                         <p>{{ $curriculum->user->email }}</p>
-                        <a href="{{ route('curriculum.show', $curriculum->id) }}">
+                        <a href="{{ route('curriculum.edit', $curriculum->id) }}">
                             <button class="btn btn-outline-primary w-100">Visualizar</button>
                         </a>
                     </div>

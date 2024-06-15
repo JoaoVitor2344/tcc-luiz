@@ -15,16 +15,13 @@ class UserTableSeeder extends Seeder
     {
         $user = new \App\Models\User();
 
-        $user->name = 'Admin';
-        $user->email = 'admin@localhost';
-        $user->password = bcrypt('admin');
-        $user->assignRole('admin');
+        if (!$user->where('email', 'admin@localhost')->exists()) {
+            $user->name = 'Admin';
+            $user->email = 'admin@localhost';
+            $user->password = bcrypt('admin');
+            $user->assignRole('admin');
 
-        $user->save();
-
-//        User::factory(10)->create();
-
-
-
+            $user->save();
+        }
     }
 }

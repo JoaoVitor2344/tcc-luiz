@@ -18,10 +18,22 @@ class LoginController extends Controller
         if (!Auth::check()) {
             $credentials = $request->only('email', 'password');
             if (Auth::attempt($credentials)) {
-                return redirect()->route('dashboard');
+                $remember = $request->input('remember', false);
+                $email = $request->input('email');
+                $password = $request->input('password');
+
+                Auth::attempt(['email' => $email, 'password' => $password], $remember);
+
+                return redirect()->route('curriculum.index');
             }
         }
 
-        return redirect()->route('login')->with('error', 'Usuário ou senha inválidos');
+        return redirect()->back()->withErrors(['message' => 'Usuário ou senha inválidos'])->withInput();
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

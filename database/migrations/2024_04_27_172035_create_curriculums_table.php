@@ -23,12 +23,6 @@ return new class extends Migration
             $table->string('github')->nullable();
             $table->string('portfolio')->nullable();
             $table->string('objective')->nullable();
-            $table->json('skills')->nullable();
-            $table->json('experience')->nullable();
-            $table->json('education')->nullable();
-            $table->json('certifications')->nullable();
-            $table->json('languages')->nullable();
-            $table->json('hobbies')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

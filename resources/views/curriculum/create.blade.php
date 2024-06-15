@@ -1,7 +1,5 @@
 @extends('layouts.app', [
     'title' => 'Currículo',
-    'btnText' => 'Cadastrar currículo',
-    'btnRoute' => 'curriculum.create',
     'breadCrumb' => [
         ['text' => 'Currículos', 'route' => 'curriculum.index'],
         ['text' => 'Cadastrar'],
@@ -15,7 +13,7 @@
             <div class="form-group">
                 <select class="form-control" name="user" id="user">
                     @foreach($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        <option value="{{ $user->id }}" @selected($user->id == $id)>{{ $user->name }}</option>
                     @endforeach
                 </select>
             </div>

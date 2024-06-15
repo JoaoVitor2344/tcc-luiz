@@ -21,6 +21,11 @@ class PermissionsTableSeeder extends Seeder
             'curriculum.create',
             'curriculum.edit',
             'curriculum.delete',
+            'users.index',
+            'users.show',
+            'users.create',
+            'users.edit',
+            'users.delete',
         ];
 
         foreach ($permissions as $permission) {

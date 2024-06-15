@@ -26,7 +26,30 @@ class RolesTableSeeder extends Seeder
             $permissions = \Spatie\Permission\Models\Permission::all();
             foreach ($permissions as $permission) {
                 \Spatie\Permission\Models\Role::findByName('admin')->givePermissionTo($permission);
+                \Spatie\Permission\Models\Role::findByName('RH')->givePermissionTo($permission);
             }
+        }
+
+        $permissionsUser = [
+            'dashboard.view',
+            'login.view',
+            'login.do',
+            'curriculum.index',
+            'curriculum.show',
+            'curriculum.create',
+            'curriculum.edit',
+            'curriculum.delete',
+        ];
+
+        foreach ($permissionsUser as $permission) {
+            if (!\Spatie\Permission\Models\Permission::where('name', $permission)->exists()) {
+                \Spatie\Permission\Models\Permission::create(['name' => $permission]);
+            }
+        }
+
+        $role = \Spatie\Permission\Models\Role::findByName('user');
+        foreach ($permissionsUser as $permission) {
+            $role->givePermissionTo($permission);
         }
     }
 }

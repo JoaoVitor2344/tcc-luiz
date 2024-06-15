@@ -42,33 +42,25 @@
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
                                                id="exampleInputEmail" name="email" aria-describedby="emailHelp"
-                                               placeholder="Enter Email Address...">
+                                               placeholder="Digite o e-mail" value="{{ old('email') }}">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group d-flex align-items-center">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" name="password" placeholder="Password">
+                                               id="exampleInputPassword" name="password" placeholder="Digite a senha"
+                                               value="{{ old('password') }}">
+                                        <a class="show-password" style="right: 80px;">Mostrar</a>
                                     </div>
+                                    @if($errors->any())
+                                        <p style="color: red;">{{ $errors->first() }}</p>
+                                    @endif
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">Remember
-                                                Me</label>
+                                            <input type="checkbox" class="custom-control-input" name="remember">
+                                            <label class="custom-control-label" for="customCheck">Lembrar de mim</label>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-user btn-block">Login</button>
-                                    @if($errors->any())
-                                        <div class="alert alert-danger mt-3" role="alert">
-                                            {{ $errors->first() }}
-                                        </div>
-                                    @endif
+                                    <button class="btn btn-primary btn-user btn-block">Logar</button>
                                 </form>
-                                {{--                                <hr>--}}
-                                {{--                                <div class="text-center">--}}
-                                {{--                                    <a class="small" href="forgot-password.html">Forgot Password?</a>--}}
-                                {{--                                </div>--}}
-                                {{--                                <div class="text-center">--}}
-                                {{--                                    <a class="small" href="register.html">Create an Account!</a>--}}
-                                {{--                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -90,6 +82,21 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.show-password').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var input = this.previousElementSibling;
+                if (input.getAttribute('type') === 'password') {
+                    input.setAttribute('type', 'text');
+                } else {
+                    input.setAttribute('type', 'password');
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 
