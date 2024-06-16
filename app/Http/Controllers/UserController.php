@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -32,6 +33,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
+            'role' => 'required',
         ]);
 
         $user = new User();
@@ -40,7 +42,7 @@ class UserController extends Controller
         $user->password = bcrypt($data['password']);
         $user->save();
 
-        $user->assignRole('user');
+        $user->assignRole($data['role']);
 
         return redirect()->route('users.index')->with('success', 'Usuário criado com sucesso!');
     }
@@ -65,6 +67,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'nullable',
+            'role' => 'required',
         ]);
 
         $user = User::find($id);
@@ -80,6 +83,12 @@ class UserController extends Controller
         }
 
         $user->save();
+
+        foreach ($user->roles as $role) {
+            $user->removeRole($role);
+        }
+
+        $user->assignRole($data['role']);
 
         return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso!');
     }

@@ -32,6 +32,13 @@
                            value="">
                     <a class="show-password">Mostrar</a>
                 </div>
+                <div class="form-group d-flex align-items-center">
+                    <select class="form-control" name="role" id="role">
+                        <option value="user" @selected($user->hasRole('user'))>Usuário</option>
+                        <option value="rh" @selected($user->hasRole('RH'))>RH</option>
+                        <option value="admin" @selected($user->hasRole('admin'))>Administrador</option>
+                    </select>
+                </div>
                 <p id="message-password" style="color: red; display: none;">As senhas estão diferentes</p>
                 <button class="btn btn-outline-primary w-100" id="btn-atualizar">Atualizar</button>
             </div>

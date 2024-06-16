@@ -28,7 +28,8 @@
                         <h3 class="text-truncate">{{ $user->name }}</h3>
                     </div>
                     <div class="card-body">
-                        <a href="{{ route('users.edit', $user->id) }}">
+                        <p>{{ $user->email }}</p>
+                        <a class="col-6" href="{{ route('users.edit', $user->id) }}">
                             <button class="btn btn-outline-primary w-100">Visualizar</button>
                         </a>
                     </div>
@@ -49,6 +50,7 @@
                         <h3 class="text-truncate">{{ $user->name }}</h3>
                     </div>
                     <div class="card-body">
+                        <p>{{ $user->email }}</p>
                         <a href="{{ route('users.edit', $user->id) }}">
                             <button class="btn btn-outline-primary w-100">Visualizar</button>
                         </a>
@@ -70,6 +72,7 @@
                         <h3 class="text-truncate">{{ $user->name }}</h3>
                     </div>
                     <div class="card-body">
+                        <p>{{ $user->email }}</p>
                         <a href="{{ route('users.edit', $user->id) }}">
                             <button class="btn btn-outline-primary w-100">Visualizar</button>
                         </a>
@@ -81,8 +84,8 @@
 
     @push('js')
         <script>
-            $(document).ready(function() {
-                $('.btn-switch').click(function() {
+            $(document).ready(function () {
+                $('.btn-switch').click(function () {
                     $('.btn-switch').attr('disabled', false);
                     $(this).attr('disabled', true);
 
