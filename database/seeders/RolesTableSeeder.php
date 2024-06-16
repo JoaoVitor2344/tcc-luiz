@@ -26,7 +26,6 @@ class RolesTableSeeder extends Seeder
             $permissions = \Spatie\Permission\Models\Permission::all();
             foreach ($permissions as $permission) {
                 \Spatie\Permission\Models\Role::findByName('admin')->givePermissionTo($permission);
-                \Spatie\Permission\Models\Role::findByName('RH')->givePermissionTo($permission);
             }
         }
 
@@ -50,6 +49,11 @@ class RolesTableSeeder extends Seeder
         $role = \Spatie\Permission\Models\Role::findByName('user');
         foreach ($permissionsUser as $permission) {
             $role->givePermissionTo($permission);
+        }
+
+        $permissions = \Spatie\Permission\Models\Permission::all();
+        foreach ($permissions as $permission) {
+            \Spatie\Permission\Models\Role::findByName('RH')->givePermissionTo($permission);
         }
     }
 }

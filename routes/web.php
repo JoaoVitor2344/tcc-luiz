@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
-//    Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-
     Route::prefix('curriculo')->group(function () {
         Route::get('/', [\App\Http\Controllers\CurriculumController::class, 'index'])->name('curriculum.index');
         Route::get('/novo/{id?}', [\App\Http\Controllers\CurriculumController::class, 'create'])->name('curriculum.create');
