@@ -31,3 +31,8 @@ Route::prefix('login')->group(function () {
     Route::post('/', [\App\Http\Controllers\LoginController::class, 'login'])->name('login.do');
     Route::get('/sair', [\App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 });
+
+Route::prefix('register')->group(function () {
+    Route::get('/', [\App\Http\Controllers\RegisterController::class, 'index'])->name('register');
+    Route::post('/', [\App\Http\Controllers\RegisterController::class, 'store'])->name('register.do');
+});

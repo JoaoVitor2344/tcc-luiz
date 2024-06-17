@@ -37,8 +37,13 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="p-5">
-                                <form class="user" action="{{ route('login.do') }}" method="POST">
+                                <form class="user" action="{{ route('register.do') }}" method="POST">
                                     @csrf
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user"
+                                               id="exampleInputName" name="name" aria-describedby="nameHelp"
+                                               placeholder="Digite o nome completo" value="{{ old('name') }}">
+                                    </div>
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
                                                id="exampleInputEmail" name="email" aria-describedby="emailHelp"
@@ -53,16 +58,10 @@
                                     @if($errors->any())
                                         <p style="color: red;">{{ $errors->first() }}</p>
                                     @endif
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" name="remember">
-                                            <label class="custom-control-label" for="customCheck">Lembrar de mim</label>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary btn-user btn-block">Logar</button>
+                                    <button class="btn btn-primary btn-user btn-block">Cadastrar</button>
                                 </form>
                                 <div class="mt-3 text-center">
-                                    <a href="{{ route('register') }}">Cadastrar-se</a>
+                                    <a href="{{ route('login') }}">Logar</a>
                                 </div>
                             </div>
                         </div>
@@ -85,6 +84,9 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

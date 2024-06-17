@@ -94,7 +94,6 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            {{--                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Página Inicial</a></li>--}}
                             @if(count($breadCrumb) > 0)
                                 @foreach($breadCrumb as $item)
                                     <li class="breadcrumb-item active" aria-current="page">
@@ -128,9 +127,7 @@
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2021</span>
-                </div>
+                <div class="copyright text-center my-auto"></div>
             </div>
         </footer>
         <!-- End of Footer -->

@@ -38,6 +38,7 @@ class RolesTableSeeder extends Seeder
             'curriculum.create',
             'curriculum.edit',
             'curriculum.delete',
+            'users.edit'
         ];
 
         foreach ($permissionsUser as $permission) {
