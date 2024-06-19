@@ -43,9 +43,7 @@ class CurriculumController extends Controller
             $users = collect();
             $users->push(auth()->user());
         } else {
-            $users = User::wherehas('roles', function ($query) {
-                $query->where('name', 'user');
-            })->get();
+            $users = User::all();
         }
 
         return view('curriculum.create', compact('users', 'id'));

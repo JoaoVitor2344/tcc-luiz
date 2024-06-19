@@ -52,8 +52,21 @@ class RolesTableSeeder extends Seeder
             $role->givePermissionTo($permission);
         }
 
-        $permissions = \Spatie\Permission\Models\Permission::all();
-        foreach ($permissions as $permission) {
+        $permissionsRH = [
+            'dashboard.view',
+            'login.view',
+            'login.do',
+            'curriculum.index',
+            'curriculum.show',
+            'curriculum.create',
+            'curriculum.edit',
+            'curriculum.delete',
+            'users.index',
+            'users.show',
+            'users.create',
+            'users.delete',
+        ];
+        foreach ($permissionsRH as $permission) {
             \Spatie\Permission\Models\Role::findByName('RH')->givePermissionTo($permission);
         }
     }

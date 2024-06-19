@@ -49,7 +49,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        if (!auth()->user()->can('users.edit')) {
+        if (!auth()->user()->can('users.edit') && $id != auth()->user()->id) {
             abort(403);
         }
 
@@ -59,7 +59,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        if (!auth()->user()->can('users.edit')) {
+        if (!auth()->user()->can('users.edit') && $id != auth()->user()->id) {
             abort(403);
         }
 
