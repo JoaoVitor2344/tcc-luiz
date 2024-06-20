@@ -17,7 +17,7 @@ class CurriculumController extends Controller
 {
     public function index()
     {
-        $curriculums = Curriculum::all();
+        $curriculums = auth()->user()->hasRole('user') ? Curriculum::where('user_id', auth()->user()->id)->get() : Curriculum::all();
 
         return view('curriculum.index', compact('curriculums'));
     }
